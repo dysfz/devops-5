@@ -1,7 +1,3 @@
-# ===========================================
-# Multi-Stage Dockerfile - Frontend (React)
-# ===========================================
-
 # Stage 1: Builder
 FROM node:18-alpine AS builder
 
@@ -11,6 +7,9 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
+
+ARG REACT_APP_API_URL
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
 
 RUN npm run build
 
